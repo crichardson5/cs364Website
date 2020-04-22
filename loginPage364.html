@@ -10,11 +10,11 @@
   <div class="loginBox">
   <img src="genericAvatar.png" class="avatar">
     <h2> Login Here</h2>
-    <form>
-    <p><span class= "userInfo">Username</span></p>
-    <input type="text" name="" placeholder="Enter Username">
+    <form name="loginPage" action="index.html" method="POST" onSubmit = "return Validate_Info_Form_Data()">
+    <p><span class= "userInfo">Email Address</span></p>
+    <input type="text" id="emailAddress" name="" placeholder="Enter Email Address">
     <p><span class= "userInfo">Password</span></p>
-    <input type="password" name="" placeholder="Enter Password">
+    <input type="password" id="password" name="" placeholder="Enter Password">
     <input type="submit" name="" value="Login">
        </form>
   </div>
