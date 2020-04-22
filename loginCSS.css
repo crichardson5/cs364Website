@@ -19,6 +19,13 @@
  box-sizing: border-box;
 }
 
+.loginBox input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+
 .avatar{
  width: 100px;
  height: 100px;
