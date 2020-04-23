@@ -1,7 +1,8 @@
 function Validate_Info_Form_Data(){
   //Set errorsWithForm to False
   var errorsWithForm = true;
-
+ 
+  
  var emailAddress = document.forms["loginPage364"]["emailAddress"].value;
   if (emailAddress == "") {
     alert("Email Address name must be filled out");
