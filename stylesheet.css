@@ -119,3 +119,8 @@ input:valid {
 text-decoration: underline;
 font-weight: bold;
 }
+
+.italicize{
+font-style: italic;
+font-weight: bold;
+}
