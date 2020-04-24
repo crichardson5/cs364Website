@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 unset($_SESSION['login_user']);
 if(!isset($_SESSION["login_user"])) // Destroying All Sessions
