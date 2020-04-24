@@ -1,6 +1,7 @@
 ﻿<?php
 session_start();
-if(session_destroy()) // Destroying All Sessions {
-header("Location: loginPage364.php"); // Redirecting To Home Page
+unset($_SESSION['login_user']);
+if(!isset($_SESSION["login_user"])) // Destroying All Sessions
+{header("Location: loginPage364.php"); // Redirecting To Home Page
 }
 ?>
