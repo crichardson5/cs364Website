@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang - "en">
   <head>
     <meta charset="utf-8">
@@ -13,10 +13,11 @@
 			<a href="viewBudget.html">View Budget</a>
 			<a href="logout.php">Logout</a>
 		</div>
+<form id="createBudgetForm" class="form-vertical" method="post">
     <table>
       <tr>
 	<th>Category</th>
-        <th>Enter Amount</th>
+        <th>Enter Dollar Amount</th>
       </tr>
       <tr>
         <td>Housing</td>
@@ -63,5 +64,9 @@
 	<td><input type="text"></td>
       </tr>
     </table>
+<div class="submitbutton" align="center">
+   <input type="submit" name="submit" value="Submit Budget">
+</div>
+</form>
   </body>
 </html>

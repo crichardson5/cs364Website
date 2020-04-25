@@ -1,4 +1,4 @@
-﻿﻿<?php
+﻿<?php
 include('login.php'); // Includes Login Script
 if(isset($_SESSION['login_user'])){
 header("location: index.html"); // Redirecting To Index Page
@@ -23,6 +23,7 @@ header("location: index.html"); // Redirecting To Index Page
     <p><span class= "userInfo">Password</span></p>
     <input type="password" id="password" name="password" placeholder="Enter Password">
     <input type="submit" name="submit" value="Login">
+    <? php echo $errorMessage; ?>
        </form>
     </div>
   </div>
