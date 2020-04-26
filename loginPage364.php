@@ -1,8 +1,6 @@
 ﻿<?php
-include('login.php'); // Includes Login Script
-if(isset($_SESSION['login_user'])){
-header("location: index.html"); // Redirecting To Index Page
-}
+session_start();
+$error = false;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +10,11 @@ header("location: index.html"); // Redirecting To Index Page
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body class= "loginBody">
+ <?php
+      if ($error) {
+        echo "Invalid username or password.";
+      }
+     ?>
 <h1> Welcome to the Personal Finance Tracker</h1>
   <div class="loginBox">
   <img src="genericAvatar.png" class="avatar">
@@ -19,10 +22,12 @@ header("location: index.html"); // Redirecting To Index Page
 	<div class= "form">
     <form name="loginPage364" action="index.html" method="POST" onSubmit = "return Validate_Info_Form_Data()">
     <p><span class= "userInfo">Email Address</span></p>
-    <input type="text" id="emailAddress" name="emailAddress" placeholder="Enter Email Address">
+    <input type="text" id="emailAddress" name="emailAddress" placeholder="Enter Email Address"
+    value="<?php if (isset($_POST["username"]))
+                            echo $_POST["username"]; ?>"/>
     <p><span class= "userInfo">Password</span></p>
-    <input type="password" id="password" name="password" placeholder="Enter Password">
-    <input type="submit" name="submit" value="Login">
+    <input type="password" id="password" name="password" placeholder="Enter Password" />
+    <input type="submit" name="submit" value="Login" />
     <? php echo $errorMessage; ?>
        </form>
     </div>
