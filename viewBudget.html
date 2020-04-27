@@ -8,280 +8,102 @@
 	</head>
 	
 	<body>
-		<h2>View Budget</h2>
-		
-		<div class="navBar" align="center">
-			<a href="index.html">Home</a>
-			<a href="createBudget.html">Create Budget</a>
-			<a class="active" href="viewBudget.html">View Budget</a>
-			<a href="logout.php">Logout</a>
+		<div class="header">
+			<h1>View Budget</h1>
+			<div class="navBar" align="center">
+				<a href="index.html">Home</a>
+				<a href="createBudget.html">Create Budget</a>
+				<a class="active" href="viewBudget.html">View Budget</a>
+				<a href="logout.php">Logout</a>
+			</div>
 		</div>
 		
-		<table>
+		<br><br>
+		
+		<form id="selectBudgetMonth" class="form-vertical">
+			<label for="budgetMonth">Select Month</label>
+			<input type="month" id="budgetMonth" name="budgetMonth" value="2020-04">		
+		</form>
+		
+		<br>
+		
+		<table class="viewTable">
 			<tr>
-				<th colspan="2">Housing</th>
-				<th>Total: $100</th>
+				<th>Category</th>
+				<th>Budgeted</th>
+				<th>Spent</th>
+				<th>Remaining</th>
 			</tr>
 			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
+				<td>Housing</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>
 			</tr>
 			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
+				<td>Transportation</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>
 			</tr>
 			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
+				<td>Food</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>				
 			</tr>
 			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
+				<td>Utilities</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>				
 			</tr>
+				<td>Insurance</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>
 			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
+				<td>Debt Payments</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>
 			</tr>
 			<tr>
-				<th colspan="2">Transportation</th>
-				<th>Total: $100</th>
+				<td>Investing</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>				
 			</tr>
 			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
+				<td>Saving</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>				
 			</tr>
 			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
+				<td>Personal</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>				
 			</tr>
 			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
+				<td>Recreation</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>				
 			</tr>
 			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<th colspan="2">Food</th>
-				<th>Total: $100</th>
-			</tr>
-			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<th colspan="2">Utilities</th>
-				<th>Total: $100</th>
-			</tr>
-			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<th colspan="2">Insurance</th>
-				<th>Total: $100</th>
-			</tr>
-			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<th colspan="2">Debt Payments</th>
-				<th>Total: $100</th>
-			</tr>
-			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<th colspan="2">Investing</th>
-				<th>Total: $100</th>
-			</tr>
-			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<th colspan="2">Saving</th>
-				<th>Total: $100</th>
-			</tr>
-			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<th colspan="2">Personal</th>
-				<th>Total: $100</th>
-			</tr>
-			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
+				<td>Miscellaneous</td>
+				<td>$100</td>
+				<td>$0</td>
+				<td>$100</td>				
 			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<th colspan="2">Recreation</th>
-				<th>Total: $100</th>
-			</tr>
-			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
 			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<th colspan="2">Miscellaneous</th>
-				<th>Total: $100</th>
-			</tr>
-			<tr>
-				<td colspan="2">Description/Date?</td>
-				<th>$20</th>
-			</tr>
+				<td>Total</td>
+				<td>$1100</td>
+				<td>$0</td>
+				<td>$1100</td>				
 			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
-			<tr>
-				<td colspan="2"></td>
-				<th>$20</th>
-			</tr>
 		</table>
 	</body>
 </html>
