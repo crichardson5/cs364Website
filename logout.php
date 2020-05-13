@@ -1,5 +1,5 @@
 <?php
 session_start(); // start (or resume) session
 session_destroy();
-header("Location: loginPage364.php?redirect=".$_SERVER["PHP_SELF"]);
+header("Location: loginPage364.php");
 ?>
