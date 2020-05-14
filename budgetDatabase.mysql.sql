@@ -1,4 +1,4 @@
-DROP DATABASE IF EXISTS budget
+DROP DATABASE IF EXISTS budget;
 
 CREATE DATABASE budget;
 USE budget;
@@ -7,8 +7,8 @@ CREATE TABLE systemUser (
 	id INTEGER AUTO_INCREMENT,
 	first_name CHARACTER VARYING(32) NOT NULL,
 	last_name CHARACTER VARYING(32) NOT NULL,
-	email CHARACTER VARYING(64) NOT NULL,
-	password CHARACTER VARYING(32) NOT NULL,
+	emailAddress CHARACTER VARYING(64) NOT NULL,
+	password CHARACTER VARYING(700) NOT NULL,
 	
 	PRIMARY KEY (id)
 );
@@ -52,5 +52,5 @@ CREATE TABLE budgetTransaction (
 		ON UPDATE CASCADE ON DELETE RESTRICT
 );
 
-INSERT INTO systemUser (first_name, last_name, email, password) VALUES 
-('A', 'Person', 'a@a.com', 'test');
+INSERT INTO systemUser (first_name, last_name, emailAddress, password) VALUES 
+('John', 'Doe', 'test@com', (SELECT MD5('password')));

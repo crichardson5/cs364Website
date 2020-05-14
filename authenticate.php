@@ -4,4 +4,3 @@ session_start(); // start (or resume) session
 if (! isset($_SESSION["username"])) {
   header("Location: loginPage364.php?redirect=".$_SERVER["PHP_SELF"]);
 }
-?>
