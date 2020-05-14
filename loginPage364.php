@@ -1,9 +1,28 @@
 ﻿﻿<?php
 session_start(); // start (or resume) session
 
+$dbhost = "localhost";
+$dbuser = "root";
+$dbpassword = "";
+$dbname = "budget";
+
 // create database connection ($connection)
-$connection = new mysqli("localhost", "saideepreddy", "CompSci364",
-                         "budgetDatabase");
+$connection = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
+
+if($connection){
+	echo '<h1>Connected to MySQL</h1>';
+ //if connected then Select Database.
+	$db=mysqli_select_db($connection, $dbname);
+	
+	if($db){
+		echo '<h1>Connected to database</h1>';
+	} else {
+		echo '<h1>Database is not connected</h1>';
+	}
+}
+else {
+	echo '<h1>MySQL Server is not connected</h1>';
+}
 
 $error = false;
 if (! isset($_SESSION["emailAddress"]) // already authenticated
@@ -20,10 +39,10 @@ if (! isset($_SESSION["emailAddress"]) // already authenticated
   // email address present in database
   if ($statement->fetch()) {
     // verify that the password matches stored password hash
-    if (password_verify($_POST["password"], $password_hash)) {
-      // store the email address to indicate authentication
-      $_SESSION["emailAddress"] = $_POST["emailAddress"];
-    }
+	if (sha1($_POST["password"] == $password_hash)){
+		// store the email address to indicate authentication
+		$_SESSION["emailAddress"] = $_POST["emailAddress"];
+	}
   }
 
   $error = true;
@@ -36,7 +55,7 @@ if (isset($_SESSION["emailAddress"])) { // authenticated
   }
 
   // redirect to requested page
-   header("Location: ".$location);
+   header("Location: index.html");
 }
 
  ?>
