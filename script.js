@@ -1,3 +1,20 @@
+function processRequest() {
+        var url = 'http://localhost/~student/cs364Website/api/budgets/john' //document.getElementById('url').value;
+        var method = 'GET'; //document.getElementById('method').value;
+        var content = '';//'{"isbn": "0000136006374","title": "A First Course in Database Systems","copyright": 2008,"publisher": "Pearson Education, Inc."}' //document.getElementById('content').value;
+
+        var request = new XMLHttpRequest();
+        request.onload = function() {
+          var response = document.getElementById('response');
+          response.value = request.response;
+
+          var status = document.getElementById('status');
+          status.value = request.status;
+        };
+        request.open(method, url, true);
+        request.send(content);
+      }
+
 function Validate_Info_Form_Data(){
   //Set errorsWithForm to False
   var errorsWithForm = true;
