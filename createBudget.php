@@ -1,3 +1,4 @@
+<?php include ('authenticate.php')?>
 ﻿<!DOCTYPE html>
 <html lang - "en">
 	<head>
@@ -10,9 +11,9 @@
 		<div class = "header">
 			<h1>Create Your Budget</h1>
 			<div class="navBar" align="center">
-				<a href="index.html">Home</a>
-				<a class="active" href="createBudget.html">Create Budget</a>
-				<a href="viewBudget.html">View Budget</a>
+				<a href="index.php">Home</a>
+				<a class="active" href="createBudget.php">Create Budget</a>
+				<a href="viewBudget.php">View Budget</a>
 				<a href="logout.php">Logout</a>
 			</div>
 		</div>
