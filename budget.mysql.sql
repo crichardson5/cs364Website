@@ -53,4 +53,4 @@ CREATE TABLE budgetTransaction (
 );
 
 INSERT INTO systemUser (first_name, last_name, emailAddress, password) VALUES 
-('John', 'Doe', 'test@com', (SELECT MD5('password')));
+('John', 'Doe', 'test@com', (SELECT sha1('test')));

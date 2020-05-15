@@ -1,48 +1,29 @@
-﻿﻿<?php
+﻿<?php
 session_start(); // start (or resume) session
 
-$dbhost = "localhost";
-$dbuser = "root";
-$dbpassword = "";
-$dbname = "budget";
-
 // create database connection ($connection)
-$connection = mysqli_connect($dbhost, $dbuser, $dbpassword, $dbname);
-
-if($connection){
-	echo '<h1>Connected to MySQL</h1>';
- //if connected then Select Database.
-	$db=mysqli_select_db($connection, $dbname);
-	
-	if($db){
-		echo '<h1>Connected to database</h1>';
-	} else {
-		echo '<h1>Database is not connected</h1>';
-	}
-}
-else {
-	echo '<h1>MySQL Server is not connected</h1>';
-}
+$connection = new mysqli("localhost", "student", "CompSci364",
+                         "budget");
 
 $error = false;
 if (! isset($_SESSION["emailAddress"]) // already authenticated
     && isset($_POST["emailAddress"], $_POST["password"])) {
-  // query database for account information
+  // query database for  account information
   $statement = $connection->prepare("SELECT password
-                                     FROM systemUser 
+                                     FROM systemUser
                                      WHERE emailAddress = ?;");
   $statement->bind_param("s", $_POST["emailAddress"]);
 
   $statement->execute();
   $statement->bind_result($password_hash);
 
-  // email address present in database
+  // emailAddress present in database
   if ($statement->fetch()) {
     // verify that the password matches stored password hash
-	if (sha1($_POST["password"] == $password_hash)){
-		// store the email address to indicate authentication
-		$_SESSION["emailAddress"] = $_POST["emailAddress"];
-	}
+    if ( sha1($_POST["password"]) ==  $password_hash) {
+      // store the emailAddress to indicate authentication
+      $_SESSION["emailAddress"] = $_POST["emailAddress"];
+    }
   }
 
   $error = true;
@@ -55,7 +36,7 @@ if (isset($_SESSION["emailAddress"])) { // authenticated
   }
 
   // redirect to requested page
-   header("Location: index.html");
+    header("Location: ".$location);
 }
 
  ?>
@@ -67,7 +48,7 @@ if (isset($_SESSION["emailAddress"])) { // authenticated
     <link rel="stylesheet" href="stylesheet.css">
 </head>
 <body class= "loginBody">
- <?php
+  <?php
       if ($error) {
         echo "Invalid email address or password.";
       }
@@ -79,13 +60,13 @@ if (isset($_SESSION["emailAddress"])) { // authenticated
 	<div class= "form">
     <form name="loginPage364" action="<?php echo $_SERVER["PHP_SELF"].
                              "?".$_SERVER["QUERY_STRING"]; ?>"
-                method="POST" onSubmit = "return Validate_Info_Form_Data()">
+          method="post" onSubmit = "return Validate_Info_Form_Data()">
     <p><span class= "userInfo">Email Address</span></p>
-    <input type="text" id="emailAddress" name="emailAddress" value="<?php if (isset($_POST["emailAddress"]))
-                            echo $_POST["emailAddress"]; ?>" placeholder="Enter Email Address">
+    <input type="text" id="emailAddress"  name="emailAddress" value="<?php if         (isset($_POST["emailAddress"]))
+     echo $_POST["emailAddress"]; ?>" placeholder="Enter Email Address"/>
     <p><span class= "userInfo">Password</span></p>
-    <input type="password" id="password" name="password" placeholder="Enter Password">
-    <input type="submit" name="submit" value="Login">
+    <input type="password" id="password" name="password" placeholder="Enter Password"/>
+    <input type="submit" name="submit" value="Login"/>
        </form>
     </div>
   </div>
