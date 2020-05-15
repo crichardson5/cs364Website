@@ -68,6 +68,9 @@ if (isset($_SESSION["emailAddress"])) { // authenticated
     <input type="password" id="password" name="password" placeholder="Enter Password"/>
     <input type="submit" name="submit" value="Login"/>
        </form>
+   <div style="text-align:center">   
+    <a href="createAccount.php">Create Account</a>
+   </div>
     </div>
   </div>
 <script src="script.js"></script>
