@@ -4,7 +4,7 @@
 	<head>
 		<meta charset="utf-8">
 			<link rel="stylesheet" href="stylesheet.css">
-				<title>Create Your Budget</title>
+				<title>View and Create Your Budget</title>
 	</head>
 
 	<body>
@@ -107,8 +107,25 @@
 			
 		<br>
 			<form id="addTransaction" class="form-vertical" method="post">
-				<label for="addTransaction">Add Transaction</label>
+				<label for="category">Choose a category:</label>
+					<select name="category" id="category">
+						<option value="Housing">Housing</option>
+						<option value="Transportation">Transportation</option>
+						<option value="Food">Food</option>
+						<option value="Utilities">Utilities</option>
+						<option value="Insurance">Insurance</option>
+						<option value="Debt Payments">Debt Payments</option>
+						<option value="investing">Investing</option>
+						<option value="Saving">Saving</option>
+						<option value="Personal">Personal</option>
+						<option value="Recreation">Recreation</option>
+						<option value="Miscellaneous">Miscellaneous</option>
+					</select>
+				<label for="addTransaction">Amount</label>
 				<input type="number" id="addTransaction" name="addTransaction">
+			<div class="submitbutton" align="center">
+				<input type="submit" name="submit" value="Submit Transaction">
+			</div>
 		<br>
 
 		<form id="createBudgetForm" class="form-vertical" method="post">
