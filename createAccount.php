@@ -8,6 +8,8 @@ function addUser() {
   $statement->bind_param('ssss', $_POST['first_name'], $_POST['last_name'],   
   $_POST['emailAddress'], $_POST['password']);
   $statement->execute();
+  $statement->close();
+
 }
 // create database connection ($connection)
 $connection = new mysqli("localhost", "student", "CompSci364",
