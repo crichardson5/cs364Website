@@ -1,0 +1,164 @@
+html {
+	
+	font-family: Candara, sans-serif;
+	font-size: 16px;	
+	margin: auto;
+	background-image: url(loginImage.jpg);
+	background-size: cover;
+	background-repeat: no-repeat
+	background-position: center;
+	color: white;
+}
+body {
+	padding: 5px 2px 5px 2px;
+	margin: 0;
+}
+
+p {
+	padding: 5px 20px 5px 20px;
+}
+h1 {
+	background-color: #313131;  
+	padding: 15px 15px 15px 15px;
+	border: 5px groove white;
+	text-align:center;
+}
+h2 {
+	background-color: #17223b;
+	padding: 5px;
+	border: 3px groove white;
+	text-align:center;
+}
+
+.loginh2 {
+	background-color: #525252;
+	padding: 5px;
+	border: 3px groove white;
+	text-align:center;
+}
+
+form {
+	background-color: #414141;
+	text-align: center;
+	padding: 5px;
+}
+
+.loginForm{
+	background-color: #17223b;
+}
+
+.createTable{
+	width: 50%;
+	margin:auto;
+}
+
+.viewTable{
+	width: 80%;
+	margin:auto;
+}
+
+.img{
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.header{
+	background-color: #414141; 
+}
+
+
+.navBar{
+	overflow: hidden;
+	margin: auto;
+	width: 100%;
+}
+
+.navBar a{
+	float: left;
+	color: white;
+	padding: 5px 0px 10px 0px;
+	text-decoration: none;
+	font-size: 16px;
+	width: 25%;
+	text-align: center;
+}
+
+.navBar a:hover{
+	background-color: #888888;
+	color:white;
+}
+
+.navBar a.active{
+  background-color: #17223b;
+  color: white;
+}
+
+table, th, td{
+	text-align: center;
+	background-color: #17223b;
+	border: 2px solid black;
+	border-collapse: collapse;
+	padding: 2px;
+}
+input:invalid {
+	border: 2px solid red;
+}
+
+input:valid {
+	border: 2px solid #969599;
+}
+
+.loginBox{
+ width: 310px;
+ height: 310px;
+ background-color: #17223b;
+ color: #fff;
+ top: 53%;
+ left: 50%;
+ position: absolute;
+ transform: translate(-50%, -50%);
+ box-sizing: border-box;
+}
+
+.accountBox{
+ width: 310px;
+ height: 310px;
+ background-color: #17223b;
+ color: #fff;
+ top: 53%;
+ left: 50%;
+ position: absolute;
+ transform: translate(-50%, -80%);
+ box-sizing: border-box;
+}
+
+input[type="submit"]:hover
+{
+    cursor: pointer;
+    background: #ffc107;
+    color: #000;
+}
+
+.avatar{
+ width: 100px;
+ height: 100px;
+ border-radius: 50%;
+ position: absolute;
+ top: -75px;
+ left: calc(50% - 40px);
+
+}
+
+
+.userInfo{
+text-decoration: underline;
+font-weight: bold;
+}
+
+.italicize{
+font-style: italic;
+font-weight: bold;
+}
+
+
