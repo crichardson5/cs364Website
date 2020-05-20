@@ -67,3 +67,6 @@ INSERT INTO budgetCategory VALUES
 ('Personal', '1', '50', '50'),
 ('Recreation', '1', '50', '50'),
 ('Miscellaneous', '1', '50', '50');
+
+INSERT INTO budgetTransaction VALUES
+('1', '2020-05-23', 'Housing', '40', 'test');
