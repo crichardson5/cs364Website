@@ -22,6 +22,8 @@
 	<h3>View Your Recent Transactions</h3>
 	<br>
 	<?php
+	$connection = new mysqli("localhost", "student", "CompSci364",
+                         "budget");
 		$sql = "SELECT * FROM budgetTransaction WHERE transaction_id = '1'";
 		if($result = mysqli_query($connection, $sql)){
 			if(mysqli_num_rows($result) > 0){
