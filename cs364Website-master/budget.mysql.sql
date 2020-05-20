@@ -13,13 +13,6 @@ CREATE TABLE systemUser (
 	PRIMARY KEY (id)
 );
 
-CREATE TABLE account (
-	account_num INTEGER NOT NULL,
-	balance INTEGER NOT NULL,
-	
-	PRIMARY KEY (account_num)
-);
-
 CREATE TABLE userBudget (
 	budget_id INTEGER AUTO_INCREMENT,
 	user_id INTEGER NOT NULL,
@@ -45,9 +38,9 @@ CREATE TABLE budgetCategory (
 CREATE TABLE budgetTransaction (
 	transaction_id INTEGER AUTO_INCREMENT,
 	t_date DATE NOT NULL,
-	account_num INTEGER NOT NULL,
-	description CHARACTER VARYING(128),
 	category_name CHARACTER VARYING (32),
+	t_amount INTEGER NOT NULL,
+	description CHARACTER VARYING(128),
 	
 	PRIMARY KEY (transaction_id),
 	FOREIGN KEY (account_num) REFERENCES account (account_num)
