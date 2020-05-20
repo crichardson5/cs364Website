@@ -9,7 +9,7 @@
 
 	<body>
 		<div class = "header">
-			<h1>Create Your Budget</h1>
+			<h1>View and Create Your Budget</h1>
 			<div class="navBar" align="center">
 				<a href="index.php">Home</a>
 				<a class="active" href="viewCreateBudget.php">View and Create Budget</a>
@@ -19,6 +19,8 @@
 
 		<br><br> 
 
+		<h3>View Your Budget</h3>
+		<br>
 		<form id="selectBudgetMonth" class="form-vertical">
 			<label for="budgetMonth">Select Month</label>
 			<input type="month" id="budgetMonth" name="budgetMonth" value="2020-04">		
@@ -106,6 +108,7 @@
 		</table>
 			
 		<br>
+			<h3>Add A Transaction</h3>
 			<form id="addTransaction" class="form-vertical" method="post">
 				<label for="category">Choose a category:</label>
 					<select name="category" id="category">
@@ -123,11 +126,14 @@
 					</select>
 				<label for="addTransaction">Amount</label>
 				<input type="number" id="addTransaction" name="addTransaction">
+		<br>
 			<div class="submitbutton" align="center">
 				<input type="submit" name="submit" value="Submit Transaction">
 			</div>
-		<br>
+		<br><br>
 
+		<h3>Create Your Budget</h3>
+		<br>
 		<form id="createBudgetForm" class="form-vertical" method="post">
 			<label for="budgetMonth">Month</label>
 			<input type="month" id="budgetMonth" name="budgetMonth" value="2020-04">
