@@ -1,4 +1,4 @@
-<?php include ('authenticate.php')
+<?php include ('authenticate.php');
  if(isset($_POST["submitTransaction"])){
 	if(isset($_POST["category"])){
 		if(isset($_POST["addTransaction"])){
