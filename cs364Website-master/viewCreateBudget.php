@@ -1,4 +1,12 @@
-<?php include ('authenticate.php')?>
+<?php include ('authenticate.php')
+ if(isset($_POST["submitTransaction"])){
+	if(isset($_POST["category"])){
+		if(isset($_POST["addTransaction"])){
+		
+		}
+	}
+ }
+?>
 ﻿<!DOCTYPE html>
 <html lang - "en">
 	<head>
@@ -128,7 +136,7 @@
 				<input type="number" id="addTransaction" name="addTransaction">
 		<br>
 			<div class="submitbutton" align="center">
-				<input type="submit" name="submit" value="Submit Transaction">
+				<input type="submit" name="submitTransaction" value="Submit Transaction">
 			</div>
 		<br><br>
 
