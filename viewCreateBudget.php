@@ -10,7 +10,7 @@
 $connection = new mysqli("localhost", "student", "CompSci364",
                          "budget");
 
-if (isset($_POST['submit'])){
+if (isset($_POST['submitBudget'])){
 	//gets the current user's ID num
 	$query = "SELECT * FROM systemUser WHERE login = '1'";
 	global $idNum;
@@ -110,7 +110,59 @@ if (isset($_POST['submit'])){
 			$statement->close();
 		}
 	}
-  }
+}
+
+if (isset($_POST['submitTransaction'])){
+	//gets the current user's ID num
+	$query = "SELECT * FROM systemUser WHERE login = '1'";
+	global $idNum;
+	if($result = mysqli_query($connection, $query)){
+			if(mysqli_num_rows($result) > 0){
+				while($row = mysqli_fetch_array($result)){
+					$idNum = intval($row['id']);
+				}
+		}
+	}
+	
+	//makes transaction
+	if(isset($idNum, $_POST["addTransDate"], $_POST["addTransAmt"], $_POST["addTransDes"], $_POST["category"])){
+	  $tdate = $_POST["addTransDate"];
+		$tAmt = $_POST['addTransAmt'];
+		$tdesc = $_POST["addTransDes"];
+		$tcate = $_POST["category"];
+	//echo "<script type='text/javascript'>alert('$tdate');</script>";
+		
+		//creates a new transaction
+		$query = "INSERT INTO budgetTransaction (user_id, t_date, t_amount, description, category_name) VALUES (?, ?, ?, ?, ?);";
+		if($statement = $connection->prepare($query)){
+			$statement->bind_param('sssss', $idNum, $tdate, $tamt, $tdesc, $tcate);
+			$statement->execute();
+			$statement->close();
+			//echo "<script type='text/javascript'>alert('$query');</script>";
+		}
+		$query2 = "SELECT * FROM budgetTransaction WHERE user_id ='$idNum';";
+		if($result = mysqli_query($connection, $query2)){
+				if(mysqli_num_rows($result) > 0){
+					while($row = mysqli_fetch_array($result)){
+						$transNum = intval($row['transaction_id']);
+						echo "<script type='text/javascript'>alert('$transNum');</script>";
+					}
+			}
+		}
+	}
+	
+	if(isset($budgetDate) && false){
+		//gets that budget's budget num
+		$query = "SELECT * FROM userBudget WHERE budget_date ='$budgetDate';";
+		if($result = mysqli_query($connection, $query)){
+				if(mysqli_num_rows($result) > 0){
+					while($row = mysqli_fetch_array($result)){
+						$budgetNum = intval($row['budget_id']);
+					}
+			}
+		}
+	}
+}
   
 
   ?>
@@ -226,7 +278,7 @@ if (isset($_POST['submit'])){
 			
 		<br>
 			<h3>Add A Transaction</h3>
-			<form id="addTransaction" class="form-vertical" method="post">
+			<form id="addTransForm" class="form-vertical" method="POST">
 				<label for="category">Choose a category:</label>
 					<select name="category" id="category">
 						<option value="Housing">Housing</option>
@@ -241,10 +293,18 @@ if (isset($_POST['submit'])){
 						<option value="Recreation">Recreation</option>
 						<option value="Miscellaneous">Miscellaneous</option>
 					</select>
-				<label for="addTransaction">Amount</label>
-				<input type="number" id="addTransaction" name="addTransaction">
+				<label for="addTransAmt">Amount</label>
+				<input type="number" min="0" id="addTransAmt" name="addTransAmt">
+				<label for="addTransDate">Date</label>
+				<input type="date" id="addTransDate" name="addTransDate">
+				<label for="addTransDes">Description</label>
+				<input type="text" id="addTransDes" name="addTransDes">
 		<br><br>
-				<input type="submit" name="submitTransaction" value="Submit Transaction">
+				<label class="switch">
+          <input type="checkbox" id="transSwitch" onclick="transactionSwitch()">
+          <span class="slider"></span>
+        </label>
+				<input type="submit" name="submitTransaction" id="submitTransaction" value="Submit Expense">
 		<br><br>
 
 		<h3>Create A New Budget</h3>
@@ -259,53 +319,53 @@ if (isset($_POST['submit'])){
 				</tr>
 				<tr>
 					<td>Housing</td>
-					<td><input type="number" class = "budgetAmt" name = "housingAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "housingAmt"></td>
 				</tr>
 				<tr>
 					<td>Transportation</td>
-					<td><input type="number" class = "budgetAmt" name = "transportationAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "transportationAmt"></td>
 				</tr>
 				<tr>
 					<td>Food</td>
-					<td><input type="number" class = "budgetAmt" name = "foodAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "foodAmt"></td>
 				</tr>
 				<tr>
 					<td>Utilities</td>
-					<td><input type="number" class = "budgetAmt" name = "utilitiesAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "utilitiesAmt"></td>
 				</tr>
 				<tr>
 					<td>Insurance</td>
-					<td><input type="number" class = "budgetAmt" name = "insuranceAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "insuranceAmt"></td>
 				</tr>
 				<tr>
 					<td>Debt Payments</td>
-					<td><input type="number" class = "budgetAmt" name = "debtAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "debtAmt"></td>
 				</tr>
 				<tr>
 					<td>Investing</td>
-					<td><input type="number" class = "budgetAmt" name = "investAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "investAmt"></td>
 				</tr>
 				<tr>
 					<td>Savings</td>
-					<td><input type="number" class = "budgetAmt" name = "savingsAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "savingsAmt"></td>
 				</tr>
 				<tr>
 					<td>Personal</td>
-					<td><input type="number" class = "budgetAmt" name = "personalAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "personalAmt"></td>
 				</tr>
 				<tr>
 					<td>Recreation</td>
-					<td><input type="number" class = "budgetAmt" name = "recAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "recAmt"></td>
 				</tr>
 				<tr>
 					<td>Miscellaneous</td>
-					<td><input type="number" class = "budgetAmt" name = "miscAmt"></td>
+					<td><input type="number" min="0" class = "budgetAmt" name = "miscAmt"></td>
 				</tr>
 			</table>
 
 			<br>
 
-			<input type="submit" name="submit" value="Submit Budget">
+			<input type="submit" name="submitBudget" value="Submit Budget">
 		
 
 		</form>
