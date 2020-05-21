@@ -10,23 +10,29 @@
 	</head>
 	
 	<body>
+	<div id="page-container">
+		<div id="content-wrap">
 		<div class="header">
 			<h1>Welcome to the Personal Finance Tracker</h1>
 			<div class="navBar" align="center">
 				<a class="active" href="index.php">Home</a>
-				<a href="createBudget.php">Create Budget</a>
-				<a href="viewBudget.php">View Budget</a>
+				<a href="viewCreateBudget.php">Manage Budget</a>
+				<a href="viewTransaction.php">Transactions</a>
 				<a href="logout.php">Logout</a>
-				<input onclick="processRequest()" type="button" value="Test Submit"/>
-				<textarea cols="80" id="response" name="response"
-                    readonly="readonly" rows="8"></textarea>
 			</div>
         </div>
 		
-		<br><br><br>
-		<h2>
-			Click on <span class="italicize"> Create Budget</span> to set up your own customized budget.<br> 
-			Click on <span class="italicize"> View Budget</span> to view your current allocation and allowed expenditure.
-		</h2>
+		<br><br>
+		<h3 class="mainPage">
+			The personal finance tracker is a financial management tool created by four Air Force Academy students to help you practice smart money managament.<br>
+			This tool allows you to construct a monthly budget and keep it up to date by recording your spending through our transactions feature, which will then dynamically update how much you have left to spend for the month.<br><br>
+			Click on <span class="italicize"> Manage Budget</span> to set up your own customized budget or to view your current budget.<br><br>
+			Click on <span class="italicize"> Transactions</span> to view your transaction history.<br>
+		</h3>
+		</div>
+		<footer id = "footer">
+			Created by C1Cs Belcher, Reddy, Richardson and Shumate
+		</footer>
+		</div>
 	</body>
 </html>
