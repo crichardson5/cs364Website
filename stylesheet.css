@@ -30,6 +30,19 @@ h2 {
 	text-align:center;
 }
 
+h3 {
+	color: white;
+	text-align:center;
+	background-color:#17223b;  
+	vertical-align: middle; 
+	padding:20px 47px;
+}
+
+.mainPage{
+	text-align:left;
+	border: 5px groove white;
+}
+
 .loginh2 {
 	background-color: #525252;
 	padding: 5px;
@@ -38,7 +51,6 @@ h2 {
 }
 
 form {
-	background-color: #414141;
 	text-align: center;
 	padding: 5px;
 }
@@ -67,7 +79,21 @@ form {
 	background-color: #414141; 
 }
 
+#page-container{
+	position:relative;
+	min-height: 100vh;
+}
 
+#content-wrap {
+  padding-bottom: 2 rem;    
+}
+
+#footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 2 rem;            
+}
 .navBar{
 	overflow: hidden;
 	margin: auto;
@@ -150,7 +176,6 @@ input[type="submit"]:hover
 
 }
 
-
 .userInfo{
 text-decoration: underline;
 font-weight: bold;
@@ -161,4 +186,7 @@ font-style: italic;
 font-weight: bold;
 }
 
-
+.broke{
+	background-color: red;
+	color: white;
+}
