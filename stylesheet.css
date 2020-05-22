@@ -143,19 +143,19 @@ input:valid {
  top: 53%;
  left: 50%;
  position: absolute;
- transform: translate(-50%, -50%);
+ transform: translate(-50%, -40%);
  box-sizing: border-box;
 }
 
 .accountBox{
  width: 310px;
- height: 310px;
+ height: 600px;
  background-color: #17223b;
  color: #fff;
  top: 53%;
  left: 50%;
  position: absolute;
- transform: translate(-50%, -80%);
+ transform: translate(-50%, -35%);
  box-sizing: border-box;
 }
 

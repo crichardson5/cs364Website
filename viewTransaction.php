@@ -12,7 +12,7 @@
 			<div class="navBar" align="center">
 				<a href="index.php">Home</a>
 				<a href="viewCreateBudget.php">Manage Budget</a>
-				<a class="active" href="viewTransaction.html">Transactions</a>
+				<a class="active" href="viewTransaction.php">Transactions</a>
 				<a href="logout.php">Logout</a>
 			</div>
 		</div>
@@ -22,7 +22,7 @@
 	<h3>Your Recent Transactions</h3>
 	<br>
 	<?php
-	$connection = new mysqli("localhost", "root", "",
+	$connection = new mysqli("localhost", "student", "CompSci364",
                          "budget");
 						 
 		$sql = "SELECT * FROM budgetTransaction WHERE transaction_id = '1'";
@@ -39,10 +39,11 @@
 					echo"<tr>";
 						echo "<td>" . $row['t_date'] . "</td>";
 						echo "<td>" . $row['category_name'] . "</td>";
-						echo "<td>" . $row['t_amount'] . "</td>";
+						echo "<td>$" . $row['t_amount'] . "</td>";
 						echo "<td>" . $row['description'] . "</td>";
+						echo"</tr>";
 					}
-					echo"</tr>";
+					
 				echo"</table>";
 			}
 		}

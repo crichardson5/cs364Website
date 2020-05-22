@@ -1,15 +1,11 @@
-<?php include ('authenticate.php');
- if(isset($_POST["submitTransaction"])){
-	if(isset($_POST["category"])){
-		if(isset($_POST["amount"])){
-		
-		}
-	}
- }
 
+<?php
+include('authenticate.php');
+				 
+// create database connection ($connection)
 $connection = new mysqli("localhost", "student", "CompSci364",
                          "budget");
-
+						 
 if (isset($_POST['submitBudget'])){
 	//gets the current user's ID num
 	$query = "SELECT * FROM systemUser WHERE login = '1'";
@@ -126,26 +122,24 @@ if (isset($_POST['submitTransaction'])){
 	
 	//makes transaction
 	if(isset($idNum, $_POST["addTransDate"], $_POST["addTransAmt"], $_POST["addTransDes"], $_POST["category"])){
-	  $tdate = $_POST["addTransDate"];
-		$tAmt = $_POST['addTransAmt'];
-		$tdesc = $_POST["addTransDes"];
-		$tcate = $_POST["category"];
-	//echo "<script type='text/javascript'>alert('$tdate');</script>";
+
 		
 		//creates a new transaction
 		$query = "INSERT INTO budgetTransaction (user_id, t_date, t_amount, description, category_name) VALUES (?, ?, ?, ?, ?);";
 		if($statement = $connection->prepare($query)){
 			$statement->bind_param('sssss', $idNum, $tdate, $tamt, $tdesc, $tcate);
+			$tdate = $_POST["addTransDate"];
+		$tAmt = $_POST['addTransAmt'];
+		$tdesc = $_POST["addTransDes"];
+		$tcate = $_POST["category"];
 			$statement->execute();
 			$statement->close();
-			//echo "<script type='text/javascript'>alert('$query');</script>";
 		}
 		$query2 = "SELECT * FROM budgetTransaction WHERE user_id ='$idNum';";
 		if($result = mysqli_query($connection, $query2)){
 				if(mysqli_num_rows($result) > 0){
 					while($row = mysqli_fetch_array($result)){
 						$transNum = intval($row['transaction_id']);
-						echo "<script type='text/javascript'>alert('$transNum');</script>";
 					}
 			}
 		}
@@ -215,9 +209,9 @@ if (isset($_POST['submitTransaction'])){
 					}
 			}
 		}
-		
+		echo" <h3>View Your Budget</h3>";
 		if($budgetNum > 0){
-			echo" <h3>View Your Budget</h3>
+			echo"
 			<form id='selectBudgetMonth' class='form-vertical'>
 				<label for='budgetMonth'>Select Month</label>
 				<input type='month' id='budgetMonth' name='budgetMonth' value=". substr($date, 0, -3) .">		
