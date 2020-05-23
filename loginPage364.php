@@ -34,7 +34,14 @@ if (isset($_SESSION["emailAddress"])) { // authenticated
   if (isset($_REQUEST["redirect"])) {
     $location = $_REQUEST["redirect"];
   }
-
+  
+  //set the current user's login to true 
+  $query = "UPDATE systemUser SET login=TRUE WHERE emailAddress=?;";
+  if($statement = $connection->prepare($query)){
+			$statement->bind_param('s', $_SESSION["emailAddress"]);
+			$statement->execute();
+			$statement->close();
+	}
   // redirect to requested page
     header("Location: ".$location);
 }
