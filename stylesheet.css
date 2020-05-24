@@ -161,9 +161,15 @@ input:valid {
 
 input[type="submit"]:hover
 {
-    cursor: pointer;
+	&:not input[type="submit"]:disabled:hover{
+	cursor: pointer;
     background: #ffc107;
     color: #000;
+	}
+}
+
+input[type="submit"]:disabled:hover{
+	cursor:not-allowed
 }
 
 .avatar{

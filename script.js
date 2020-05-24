@@ -108,4 +108,9 @@ return errorsWithForm;
 
 }
 
+function changeDate(){
+	//enable submit button
+  var submitButton = document.getElementById("submitMonth");
+  submitButton.disabled = false;
+}
 
