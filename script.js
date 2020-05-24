@@ -114,3 +114,10 @@ function changeDate(){
   submitButton.disabled = false;
 }
 
+function delTrans(offset){
+	var formVal = parseInt(document.getElementById("transID").value, 10);
+	formVal += parseInt(offset, 10);
+	document.getElementById("transID").value = formVal;
+	return true;
+}
+

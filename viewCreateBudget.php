@@ -106,6 +106,8 @@ if (isset($_POST['submitBudget'])){
 			$statement->close();
 		}
 	}
+	
+	header('location: viewCreateBudget.php');
 }
 
 if (isset($_POST['submitTransaction'])){
@@ -122,59 +124,62 @@ if (isset($_POST['submitTransaction'])){
 		}
 	}
 	
-	//sets variables
-	$addTransDate = $_POST["addTransDate"];
-	$addTransDes = $_POST["addTransDes"];
-	$category = $_POST["category"];
 	
-	//checks if its an Expense or Income
-	$transType = $_POST["submitTransaction"];
-	if($transType == 'Submit Expense'){
-	  $addTransAmt = 0 - $_POST["addTransAmt"];
-	} else {
-	  $addTransAmt = $_POST["addTransAmt"];
-	}
 	
-	//makes transaction
-	if(isset($idNum, $addTransDate, $addTransAmt, $addTransDes, $category)){
+		//sets variables
+		$addTransDate = $_POST["addTransDate"];
+		$addTransDes = $_POST["addTransDes"];
+		$category = $_POST["category"];
 		
-		//creates a new transaction
-		$query = "INSERT INTO budgetTransaction (user_id, t_date, t_amount, description, category_name) VALUES (?, ?, ?, ?, ?);";
-		if($statement = $connection->prepare($query)){
-			$statement->bind_param('sssss', $idNum, $addTransDate, $addTransAmt, $addTransDes, $category);
-			$statement->execute();
-			$statement->close();
-	  }
-	  
-	  //get current budget
-	  $newDate = substr($addTransDate,0,-2);
-	  $newDate .= "01";
-	  $queryGetBudgetCategory = "SELECT * FROM userBudget WHERE user_id = $idNum AND budget_date = '$newDate';";
-	  // AND budget_date = $newDate";
-	  //echo "<script type='text/javascript'>alert('$newDate');</script>";
-	  if($result = mysqli_query($connection, $queryGetBudgetCategory)){
-				if(mysqli_num_rows($result) > 0){
-					while($row = mysqli_fetch_array($result)){
-						$budgetNum = intval($row['budget_id']);
-						//$output = implode(" ",$row);
-				    //echo "<script type='text/javascript'>alert('$output');</script>";
-					}
-			}
+		//checks if its an Expense or Income
+		$transType = $_POST["submitTransaction"];
+		if($transType == 'Submit Expense'){
+		  $addTransAmt = 0 - $_POST["addTransAmt"];
+		} else {
+		  $addTransAmt = $_POST["addTransAmt"];
 		}
 		
-		//updates budget
-		$queryUpdate;
-		if($transType == 'Submit Expense'){
-	    $queryUpdate = "UPDATE budgetCategory SET amount_spent = amount_spent - $addTransAmt WHERE budget_id = $budgetNum AND name = '$category';";
-	  } else {
-	    $queryUpdate = "UPDATE budgetCategory SET amount_allocated = amount_allocated + $addTransAmt WHERE budget_id = $budgetNum AND name = '$category';";
-	  }
-		if($statement = $connection->prepare($queryUpdate)){
-		  //echo "<script type='text/javascript'>alert('good');</script>";
-			$statement->execute();
-			$statement->close();
-	  }
+		//makes transaction
+		if(isset($idNum, $addTransDate, $addTransAmt, $addTransDes, $category)){
+			
+			//creates a new transaction
+			$query = "INSERT INTO budgetTransaction (user_id, t_date, t_amount, description, category_name) VALUES (?, ?, ?, ?, ?);";
+			if($statement = $connection->prepare($query)){
+				$statement->bind_param('sssss', $idNum, $addTransDate, $addTransAmt, $addTransDes, $category);
+				$statement->execute();
+				$statement->close();
+		  }
+		  
+		  //get current budget
+		  $newDate = substr($addTransDate,0,-2);
+		  $newDate .= "01";
+		  $queryGetBudgetCategory = "SELECT * FROM userBudget WHERE user_id = $idNum AND budget_date = '$newDate';";
+		  // AND budget_date = $newDate";
+		  //echo "<script type='text/javascript'>alert('$newDate');</script>";
+		  if($result = mysqli_query($connection, $queryGetBudgetCategory)){
+					if(mysqli_num_rows($result) > 0){
+						while($row = mysqli_fetch_array($result)){
+							$budgetNum = intval($row['budget_id']);
+							//$output = implode(" ",$row);
+						//echo "<script type='text/javascript'>alert('$output');</script>";
+						}
+				}
+			}
+			
+			//updates budget
+			$queryUpdate;
+			if($transType == 'Submit Expense'){
+			$queryUpdate = "UPDATE budgetCategory SET amount_spent = amount_spent - $addTransAmt WHERE budget_id = $budgetNum AND name = '$category';";
+		  } else {
+			$queryUpdate = "UPDATE budgetCategory SET amount_allocated = amount_allocated + $addTransAmt WHERE budget_id = $budgetNum AND name = '$category';";
+		  }
+			if($statement = $connection->prepare($queryUpdate)){
+			  //echo "<script type='text/javascript'>alert('good');</script>";
+				$statement->execute();
+				$statement->close();
+		  }
 	}
+	header('location: viewCreateBudget.php');
 }
   
 
@@ -218,7 +223,8 @@ if (isset($_POST['submitTransaction'])){
 		
 	
 		echo" <h3>View Your Budget</h3>";
-		if(isset($_POST['submitMonth'])){
+		
+		if (isset($_POST['submitMonth'])) {
 				
 				$date = $_POST["budgetMonth"];
 				$date .= "-01";
@@ -233,47 +239,20 @@ if (isset($_POST['submitTransaction'])){
 						}
 					}
 				}
-			} else if (isset($_POST['submitBudget'])){
-				$date = $_POST["budgetMonth"];
-				$date .= "-01";
-				//gets the newly created budget
-				$query = "SELECT * FROM userBudget WHERE user_id ='$idNum' AND budget_date = '$date';";
-				$budgetNum = -1;
-				$budgetMonth;
-				if($result = mysqli_query($connection, $query)){
-					if(mysqli_num_rows($result) > 0){
-						while($row = mysqli_fetch_array($result)){
-							$budgetNum = intval($row['budget_id']);
-						}
-					}
-				}
-			}else if (isset($_POST['submitTransaction'])) {
-				$addTransDate = $_POST["addTransDate"];
-				$date = substr($addTransDate,0,-2);
-				$date .= "01";
 				
-				//gets the newly budget where a transaction was just edited
-				
-				$query = "SELECT * FROM userBudget WHERE user_id ='$idNum' AND budget_date = '$date';";
-				$budgetNum = -1;
-				$budgetMonth;
-				if($result = mysqli_query($connection, $query)){
-					if(mysqli_num_rows($result) > 0){
-						while($row = mysqli_fetch_array($result)){
-							$budgetNum = intval($row['budget_id']);
-						}
-					}
-				}
 			} else{
-				//gets the most recent budget's budget num
-				$query = "SELECT * FROM userBudget WHERE user_id ='$idNum';";
+				$date = date("Y-m");
+				$date .= "-01";
+				
+				//gets the current month
+				$query = "SELECT * FROM userBudget WHERE user_id ='$idNum' AND budget_date = '$date';";
 				$budgetNum = -1;
 				$budgetMonth;
 				if($result = mysqli_query($connection, $query)){
 					if(mysqli_num_rows($result) > 0){
 						while($row = mysqli_fetch_array($result)){
 							$budgetNum = intval($row['budget_id']);
-							$date = $row['budget_date'];
+							
 						}
 					}
 				}
@@ -292,7 +271,9 @@ if (isset($_POST['submitTransaction'])){
 			
 			<br>";
 			
+			
 		if($budgetNum > 0){
+			
 			
 			$sql = "SELECT * FROM budgetCategory WHERE budget_id = $budgetNum";
 			$budgetSum = 0;
@@ -357,30 +338,31 @@ if (isset($_POST['submitTransaction'])){
 						<option value="Insurance">Insurance</option>
 						<option value="Debt Payments">Debt Payments</option>
 						<option value="investing">Investing</option>
-						<option value="Saving">Savings</option>
+						<option value="Savings">Savings</option>
 						<option value="Personal">Personal</option>
 						<option value="Recreation">Recreation</option>
 						<option value="Miscellaneous">Miscellaneous</option>
 					</select>
 				<label for="addTransAmt">Amount</label>
-				<input type="number" min="0" id="addTransAmt" name="addTransAmt">
+				<input type="number" min="0" id="addTransAmt" name="addTransAmt" required>
 				<label for="addTransDate">Date</label>
-				<input type="date" id="addTransDate" name="addTransDate">
+				<input type="date" id="addTransDate" name="addTransDate" value=<?php echo date("Y-m-d"); ?> required>
 				<label for="addTransDes">Description</label>
-				<input type="text" id="addTransDes" name="addTransDes" pattern="[ A-Za-z0-9]{0,31}">
+				<input type="text" id="addTransDes" name="addTransDes" pattern="[ A-Za-z0-9]{0,31}" required>
 		<br><br>
 				<label class="switch">
           <input type="checkbox" id="transSwitch" name="transSwitch" onclick="transactionSwitch()">
           <span class="slider"></span>
         </label>
 				<input type="submit" name="submitTransaction" id="submitTransaction" value="Submit Expense">
+		</form>
 		<br><br>
 
 		<h3>Create A New Budget</h3>
 		<br>
 		<form id="createBudgetForm" class="form-vertical" action = "addBudget.php" method="POST" >
 			<label for="budgetMonth">Month</label>
-			<input type="month" id="budgetMonth" name="budgetMonth" pattern="[0-9]{4}-[0-9]{2}" value=<?php echo date("Y-m"); ?>>
+			<input type="month" id="budgetMonth" name="budgetMonth" pattern="[0-9]{4}-[0-9]{2}" value=<?php echo date("Y-m"); ?> required>
 			<table class="createTable">
 				<tr>
 					<th>Category</th>
@@ -388,47 +370,47 @@ if (isset($_POST['submitTransaction'])){
 				</tr>
 				<tr>
 					<td>Housing</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "housingAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "housingAmt"></td>
 				</tr>
 				<tr>
 					<td>Transportation</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "transportationAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "transportationAmt"></td>
 				</tr>
 				<tr>
 					<td>Food</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "foodAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "foodAmt"></td>
 				</tr>
 				<tr>
 					<td>Utilities</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "utilitiesAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "utilitiesAmt"></td>
 				</tr>
 				<tr>
 					<td>Insurance</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "insuranceAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "insuranceAmt"></td>
 				</tr>
 				<tr>
 					<td>Debt Payments</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "debtAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "debtAmt"></td>
 				</tr>
 				<tr>
 					<td>Investing</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "investAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "investAmt"></td>
 				</tr>
 				<tr>
 					<td>Savings</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "savingsAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "savingsAmt"></td>
 				</tr>
 				<tr>
 					<td>Personal</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "personalAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "personalAmt"></td>
 				</tr>
 				<tr>
 					<td>Recreation</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "recAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "recAmt"></td>
 				</tr>
 				<tr>
 					<td>Miscellaneous</td>
-					<td><input type="number" min="0" class = "budgetAmt" name = "miscAmt"></td>
+					<td><input type="number" min="0" max="1000000000" class = "budgetAmt" name = "miscAmt"></td>
 				</tr>
 			</table>
 

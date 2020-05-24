@@ -58,6 +58,8 @@
 			      $statement->close();
 	        }
 	        
+			
+			
 	        //removes transaction
 	        $queryDelete = "DELETE FROM budgetTransaction WHERE transaction_id = '$transID' AND user_id = '$user_id'";
 	        if($statement = $connection->prepare($queryDelete)){
@@ -65,13 +67,17 @@
 			      $statement->close();
 	        }
 				}
+				
 			} else {
+				
 			  $errorMessage = "ERROR: Transaction ID ";
 			  $errorMessage .= $transID;
 			  $errorMessage .= " not found";
-			  echo "<script type='text/javascript'>alert('$errorMessage');</script>";
+			  //echo "<script type='text/javascript'>alert('$errorMessage');</script>";
+			  
 			}
 		}
+	
   }
 ?>
 
@@ -80,7 +86,8 @@
 	<head>
 		<meta charset="utf-8">
 			<link rel="stylesheet" href="stylesheet.css">
-				<title>Transactions</title>
+			<script src="script.js"></script>
+			<title>Transactions</title>
 	</head>
 
 	<body>
@@ -99,9 +106,7 @@
 	<h3>Your Recent Transactions</h3>
 	<br>
 	<?php
-	$connection = new mysqli("localhost", "student", "CompSci364",
-                         "budget");
-						 
+
 		//gets the current user's ID num
 		$query = "SELECT * FROM systemUser WHERE login = '1'";
 		global $idNum;
@@ -116,6 +121,7 @@
 						 
 		$sql = "SELECT * FROM budgetTransaction WHERE user_id = '$idNum'";
 		if($result = mysqli_query($connection, $sql)){
+			$offset = -1;
 			if(mysqli_num_rows($result) > 0){
 				echo "<table class = 'viewTable'>";
 					echo "<tr>";
@@ -127,7 +133,11 @@
 					echo "</tr>";
 					while($row = mysqli_fetch_array($result)){
 					echo"<tr>";
-					  echo "<td>" . $row['transaction_id'] . "</td>";
+						if($offset < 0){
+							$offset = $row['transaction_id'] - 1;
+						}
+						$value = $row['transaction_id'] - $offset;
+					  echo "<td>" . $value . "</td>";
 						echo "<td>" . $row['t_date'] . "</td>";
 						echo "<td>" . $row['category_name'] . "</td>";
 						echo "<td>$" . $row['t_amount'] . "</td>";
@@ -139,13 +149,19 @@
 			}
 		}
 	?>
+		<script>
+			
+			</script>
 	
-	<br>
+		<br>
 			<h3>Delete A Transaction</h3>
-			<form id="addTransForm" class="form-vertical" method="POST">
+			<form id="addTransForm" class="form-vertical" onSubmit="return delTrans(<?php echo $offset; ?>);" method="POST">
 				<label for="transID">Transaction ID</label>
 				<input type="number" min="0" id="transID" name="transID">
 		<br><br>
 				<input type="submit" name="deleteTransaction" id="deleteTransaction" value="Delete Transaction">
+			</form>
 		<br><br>
+	
+	</body>
 </html>
