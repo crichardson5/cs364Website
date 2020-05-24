@@ -117,11 +117,26 @@
 				}
 			}
 		}
-	
+		
+		if (isset($_POST['submitMonth'])) {
+			$date = $_POST["budgetMonth"];
+		} else{
+			$date = date("Y-m");
+		}
+		
+		echo"<form id='selectBudgetMonth' class='form-vertical' method='POST'>
+				<label for='budgetMonth'>Select Month</label>
+				<input type='month' id='budgetMonth' onChange='changeDate()' name='budgetMonth' pattern='[0-9]{4}-[0-9]{2}' value=". $date ." required>
+				<br>
+				<br>
+
+				<input type='submit' id='submitMonth' name='submitMonth' disabled = 'true' value='Change Budget Month'>
+			</form>
+		
+		<br>";
 						 
 		$sql = "SELECT * FROM budgetTransaction WHERE user_id = '$idNum' ORDER BY t_date desc, transaction_id desc";
 		if($result = mysqli_query($connection, $sql)){
-			$offset = -1;
 			if(mysqli_num_rows($result) > 0){
 				echo "<table class = 'viewTable'>";
 					echo "<tr>";
@@ -131,17 +146,22 @@
 						echo "<th>Amount</th>";
 						echo "<th>Description</th>";
 					echo "</tr>";
+					$count = 0;
 					while($row = mysqli_fetch_array($result)){
-					echo"<tr>";
-					  echo "<td>" . $row['transaction_id'] . "</td>";
-						echo "<td>" . $row['t_date'] . "</td>";
-						echo "<td>" . $row['category_name'] . "</td>";
-						echo "<td>$" . $row['t_amount'] . "</td>";
-						echo "<td>" . $row['description'] . "</td>";
-						echo"</tr>";
+					  if(substr($row['t_date'],0,-3) == $date){
+					    echo"<tr>";
+					      echo "<td>" . $row['transaction_id'] . "</td>";
+						    echo "<td>" . $row['t_date'] . "</td>";
+						    echo "<td>" . $row['category_name'] . "</td>";
+						    echo "<td>$" . $row['t_amount'] . "</td>";
+						    echo "<td>" . $row['description'] . "</td>";
+						  echo"</tr>";
+						  $count = $count + 1;
+						}
 					}
-					
 				echo"</table>";
+			} else {
+			  echo "<h1> No Transactions Found</h1>";
 			}
 		}
 	?>
