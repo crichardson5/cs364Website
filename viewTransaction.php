@@ -6,7 +6,7 @@
   $connection = new mysqli("localhost", "student", "CompSci364",
                          "budget");
 					 
-  if (isset($_POST['deleteTransaction'])){
+ if (isset($_POST['deleteTransaction'])){
   
     //gets the current user's ID num
 	  $queryUserID = "SELECT * FROM systemUser WHERE login = TRUE";
@@ -119,7 +119,7 @@
 		}
 	
 						 
-		$sql = "SELECT * FROM budgetTransaction WHERE user_id = '$idNum'";
+		$sql = "SELECT * FROM budgetTransaction WHERE user_id = '$idNum' ORDER BY t_date desc, transaction_id desc";
 		if($result = mysqli_query($connection, $sql)){
 			$offset = -1;
 			if(mysqli_num_rows($result) > 0){
@@ -133,11 +133,7 @@
 					echo "</tr>";
 					while($row = mysqli_fetch_array($result)){
 					echo"<tr>";
-						if($offset < 0){
-							$offset = $row['transaction_id'] - 1;
-						}
-						$value = $row['transaction_id'] - $offset;
-					  echo "<td>" . $value . "</td>";
+					  echo "<td>" . $row['transaction_id'] . "</td>";
 						echo "<td>" . $row['t_date'] . "</td>";
 						echo "<td>" . $row['category_name'] . "</td>";
 						echo "<td>$" . $row['t_amount'] . "</td>";
@@ -155,7 +151,7 @@
 	
 		<br>
 			<h3>Delete A Transaction</h3>
-			<form id="addTransForm" class="form-vertical" onSubmit="return delTrans(<?php echo $offset; ?>);" method="POST">
+			<form id="addTransForm" class="form-vertical" method="POST">
 				<label for="transID">Transaction ID</label>
 				<input type="number" min="0" id="transID" name="transID">
 		<br><br>
