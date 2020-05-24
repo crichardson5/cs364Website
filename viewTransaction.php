@@ -25,7 +25,7 @@
 	$connection = new mysqli("localhost", "student", "CompSci364",
                          "budget");
 						 
-		$sql = "SELECT * FROM budgetTransaction WHERE transaction_id = '1'";
+		$sql = "SELECT * FROM budgetTransaction WHERE user_id = '1'";
 		if($result = mysqli_query($connection, $sql)){
 			if(mysqli_num_rows($result) > 0){
 				echo "<table class = 'viewTable'>";
