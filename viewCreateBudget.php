@@ -216,27 +216,83 @@ if (isset($_POST['submitTransaction'])){
 			}
 		}
 		
-		//gets the most recent budget's budget num
-		$query = "SELECT * FROM userBudget WHERE user_id ='$idNum';";
-		$budgetNum = -1;
-		$budgetMonth;
-		if($result = mysqli_query($connection, $query)){
-				if(mysqli_num_rows($result) > 0){
-					while($row = mysqli_fetch_array($result)){
-						$budgetNum = intval($row['budget_id']);
-						$date = $row['budget_date'];
-					}
-			}
-		}
+	
 		echo" <h3>View Your Budget</h3>";
-		if($budgetNum > 0){
-			echo"
-			<form id='selectBudgetMonth' class='form-vertical'>
-				<label for='budgetMonth'>Select Month</label>
-				<input type='month' id='budgetMonth' name='budgetMonth' pattern='[0-9]{4}-[0-9]{2}' value=". substr($date, 0, -3) .">		
-			</form>
+		if(isset($_POST['submitMonth'])){
+				
+				$date = $_POST["budgetMonth"];
+				$date .= "-01";
+				//gets the requested budget
+				$query = "SELECT * FROM userBudget WHERE user_id ='$idNum' AND budget_date = '$date';";
+				$budgetNum = -1;
+				$budgetMonth;
+				if($result = mysqli_query($connection, $query)){
+					if(mysqli_num_rows($result) > 0){
+						while($row = mysqli_fetch_array($result)){
+							$budgetNum = intval($row['budget_id']);
+						}
+					}
+				}
+			} else if (isset($_POST['submitBudget'])){
+				$date = $_POST["budgetMonth"];
+				$date .= "-01";
+				//gets the newly created budget
+				$query = "SELECT * FROM userBudget WHERE user_id ='$idNum' AND budget_date = '$date';";
+				$budgetNum = -1;
+				$budgetMonth;
+				if($result = mysqli_query($connection, $query)){
+					if(mysqli_num_rows($result) > 0){
+						while($row = mysqli_fetch_array($result)){
+							$budgetNum = intval($row['budget_id']);
+						}
+					}
+				}
+			}else if (isset($_POST['submitTransaction'])) {
+				$addTransDate = $_POST["addTransDate"];
+				$date = substr($addTransDate,0,-2);
+				$date .= "01";
+				
+				//gets the newly budget where a transaction was just edited
+				
+				$query = "SELECT * FROM userBudget WHERE user_id ='$idNum' AND budget_date = '$date';";
+				$budgetNum = -1;
+				$budgetMonth;
+				if($result = mysqli_query($connection, $query)){
+					if(mysqli_num_rows($result) > 0){
+						while($row = mysqli_fetch_array($result)){
+							$budgetNum = intval($row['budget_id']);
+						}
+					}
+				}
+			} else{
+				//gets the most recent budget's budget num
+				$query = "SELECT * FROM userBudget WHERE user_id ='$idNum';";
+				$budgetNum = -1;
+				$budgetMonth;
+				if($result = mysqli_query($connection, $query)){
+					if(mysqli_num_rows($result) > 0){
+						while($row = mysqli_fetch_array($result)){
+							$budgetNum = intval($row['budget_id']);
+							$date = $row['budget_date'];
+						}
+					}
+				}
+			
+				
+			}
+			
+			echo"<form id='selectBudgetMonth' class='form-vertical' method='POST'>
+					<label for='budgetMonth'>Select Month</label>
+					<input type='month' id='budgetMonth' onChange='changeDate()' name='budgetMonth'' value=". substr($date, 0, -3) .">
+					<br>
+					<br>
+
+					<input type='submit' id='submitMonth' name='submitMonth' disabled = 'true' value='Change Budget Month'>
+				</form>
 			
 			<br>";
+			
+		if($budgetNum > 0){
 			
 			$sql = "SELECT * FROM budgetCategory WHERE budget_id = $budgetNum";
 			$budgetSum = 0;
