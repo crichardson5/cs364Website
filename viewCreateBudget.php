@@ -25,7 +25,7 @@ if (isset($_POST['submitBudget'])){
 			
 		
 		//overwrites any budget from that month
-		$query = "DELETE FROM userBudget WHERE budget_date = '$budgetDate';";
+		$query = "DELETE FROM userBudget WHERE budget_date = '$budgetDate' AND user_id = '$idNum';";
 		if($statement = $connection->prepare($query)){
 			$statement->execute();
 			$statement->close();
@@ -360,7 +360,7 @@ if (isset($_POST['submitTransaction'])){
 
 		<h3>Create A New Budget</h3>
 		<br>
-		<form id="createBudgetForm" class="form-vertical" action = "addBudget.php" method="POST" >
+		<form id="createBudgetForm" class="form-vertical" method="POST" >
 			<label for="budgetMonth">Month</label>
 			<input type="month" id="budgetMonth" name="budgetMonth" pattern="[0-9]{4}-[0-9]{2}" value=<?php echo date("Y-m"); ?> required>
 			<table class="createTable">
