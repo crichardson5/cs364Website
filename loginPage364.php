@@ -36,7 +36,7 @@ if (isset($_SESSION["emailAddress"])) { // authenticated
   }
   
   //set the current user's login to true 
-  $query = "UPDATE systemUser SET login=TRUE WHERE emailAddress=?;";
+  $query = "UPDATE systemUser SET login= TRUE WHERE emailAddress=?;";
   if($statement = $connection->prepare($query)){
 			$statement->bind_param('s', $_SESSION["emailAddress"]);
 			$statement->execute();
