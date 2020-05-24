@@ -163,6 +163,7 @@ if (isset($_POST['submitTransaction'])){
 		}
 		
 		//updates budget
+		$queryUpdate;
 		if($transType == 'Submit Expense'){
 	    $queryUpdate = "UPDATE budgetCategory SET amount_spent = amount_spent - $addTransAmt WHERE budget_id = $budgetNum AND name = '$category';";
 	  } else {
