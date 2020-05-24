@@ -283,7 +283,7 @@ if (isset($_POST['submitTransaction'])){
 			
 			echo"<form id='selectBudgetMonth' class='form-vertical' method='POST'>
 					<label for='budgetMonth'>Select Month</label>
-					<input type='month' id='budgetMonth' onChange='changeDate()' name='budgetMonth'' value=". substr($date, 0, -3) .">
+					<input type='month' id='budgetMonth' onChange='changeDate()' name='budgetMonth' pattern='[0-9]{4}-[0-9]{2}' value=". substr($date, 0, -3) .">
 					<br>
 					<br>
 
